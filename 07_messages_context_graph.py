@@ -348,7 +348,7 @@ def demo() -> None:
         print(f"    - {type(m).__name__}: {preview!r}...")
 
     print("\n本课 DoD：")  # 自检清单
-    print("- 主路径：1)+4) 能跑通其一（建议 fallback 必绿）")
+    print("- 主路径：1)+4)+5b) 能跑通其一（建议 fallback 必绿）")
     print("- 故障/边界：3) 空输入 + 2) 裁剪导致上下文丢失")
     print("- 回归：python 07_messages_context_graph.py")
     print('- 接口稳定字段：messages / pending_user_text / mode / max_messages_to_keep')
