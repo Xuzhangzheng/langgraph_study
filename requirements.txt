@@ -1,0 +1,6 @@
+langgraph==1.1.10
+langchain==1.2.15
+langchain-openai==1.2.1
+python-dotenv==1.2.2
+ipykernel==7.2.0
+volcengine-python-sdk[ark]==5.0.25
