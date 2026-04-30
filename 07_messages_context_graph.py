@@ -315,10 +315,37 @@ def demo() -> None:
     print(bad["messages"][-1].content)  # 打印边界说明
 
     print("\n" + "=" * 72)
-    print("4) LLM 模式（需有效配置；否则 generate 内退回规则/错误文本）")
+    print("4) LLM：第一次 invoke（messages 从空列表开始）")
     print("=" * 72)
-    s_llm = g.invoke(_base_initial("用一句话介绍 LangGraph。", "llm", 0))  # 走真实或降级调用
-    print(s_llm["messages"][-1].content[:800])  # 预览前 800 字
+    s_llm_4 = g.invoke(_base_initial("用一句话介绍 LangGraph。", "llm", 0))  # existing_messages 缺省 -> 新会话
+    print(s_llm_4["messages"][-1].content[:800])  # 只看本条 AI 回复
+
+    print("\n" + "=" * 72)
+    print("5) LLM：第二次 invoke——若仍不传 existing_messages，则又是新会话，与 4) 无关")
+    print("=" * 72)
+    s_llm_5_isolated = g.invoke(  # 注意：这里 messages 仍是 [] 起步，不会带上 4) 的历史
+        _base_initial("Langgraph和LangChain有什么区别。", "llm", 0),
+    )
+    print(s_llm_5_isolated["messages"][-1].content[:800])
+    print("\n  仅 5) 本段 invoke 的 messages 条数:", len(s_llm_5_isolated["messages"]))  # 通常 Human+AI 共 2 条上下
+
+    print("\n" + "=" * 72)
+    print("5b) LLM：第二次追问时传入 existing_messages=4) 的 messages，才会在同一条列表里累积")
+    print("=" * 72)
+    s_llm_5_chained = g.invoke(
+        _base_initial(
+            "Langgraph和LangChain有什么区别。",
+            "llm",
+            0,
+            existing_messages=s_llm_4["messages"],  # 多轮关键：把 4) 的整条消息链拷进初值
+        ),
+    )
+    print(s_llm_5_chained["messages"][-1].content[:800])
+    print("\n  延续上下文后 messages 条数:", len(s_llm_5_chained["messages"]))  # 应明显多于「孤立 5)」
+    print("  messages 列表摘要（类型+内容前 40 字）:")
+    for m in s_llm_5_chained["messages"]:
+        preview = (m.content if isinstance(m.content, str) else str(m.content))[:40]
+        print(f"    - {type(m).__name__}: {preview!r}...")
 
     print("\n本课 DoD：")  # 自检清单
     print("- 主路径：1)+4) 能跑通其一（建议 fallback 必绿）")
