@@ -40,6 +40,13 @@ mvn -q exec:java -Dexec.mainClass=study.langgraph.lessons.l04d_reducer_strategie
 mvn -q exec:java -Dexec.mainClass=study.langgraph.lessons.l05_tool_call_graph.Lesson05App
 mvn -q exec:java -Dexec.mainClass=study.langgraph.lessons.l06_llm_integration_graph.Lesson06App
 mvn -q exec:java -Dexec.mainClass=study.langgraph.lessons.l07_messages_context_graph.Lesson07App
+mvn -q exec:java -Dexec.mainClass=study.langgraph.lessons.l08_multi_tool_routing.Lesson08App
+mvn -q exec:java -Dexec.mainClass=study.langgraph.lessons.l09_subgraph_modular_graph.Lesson09App
+mvn -q exec:java -Dexec.mainClass=study.langgraph.lessons.l10_parallel_fanin_graph.Lesson10App
+mvn -q exec:java -Dexec.mainClass=study.langgraph.lessons.l11_human_in_the_loop_graph.Lesson11App
+mvn -q exec:java -Dexec.mainClass=study.langgraph.lessons.l13_observability_debug_graph.Lesson13App
+mvn -q exec:java -Dexec.mainClass=study.langgraph.lessons.l14_error_handling_robustness_graph.Lesson14App
+mvn -q exec:java -Dexec.mainClass=study.langgraph.lessons.l14b_payment_capture_resilience.Lesson14bApp
 ```
 
 ## 与 Python 脚本的对应关系
@@ -56,6 +63,16 @@ mvn -q exec:java -Dexec.mainClass=study.langgraph.lessons.l07_messages_context_g
 | `lessons.l05_tool_call_graph` | `05_tool_call_graph.py`（计算器：白名单校验 + Nashorn 脚本引擎） |
 | `lessons.l06_llm_integration_graph` | `06_llm_integration_graph.py` |
 | `lessons.l07_messages_context_graph` | `07_messages_context_graph.py` |
+| `lessons.l08_multi_tool_routing` | `08_multi_tool_routing_graph.py`（多工具择一 + `finalize_result` 排版 + 兜底） |
+| `lessons.l09_subgraph_modular_graph` | `09_subgraph_modular_graph.py`（主图嵌套 compile 子图；Java 用 invoke 包装） |
+| `lessons.l10_parallel_fanin_graph` | `10_parallel_fanin_graph.py`（并行 fragments + 单点 aggregate；动态 Send 见 l04b） |
+| `lessons.l11_human_in_the_loop_graph` | `11_human_in_the_loop_graph.py`（**完整 HITL**：`interrupt`+`Command`；Java 为队列模拟同一拓扑） |
+| — | `11b_human_in_the_loop_console_graph.py`（**仅 Python**：控制台 `input` 驱动 `resume`，图与 l11 相同） |
+| **—** | **`12_checkpoint_memory_graph.py`（仅 Python：`get_state` / `get_state_history` / `update_state`；无 l12 Java）** |
+| `lessons.l13_observability_debug_graph` | `13_observability_debug_graph.py`（`stream_mode`/checkpoints 以 Python 为准；Java：`logging` + chunk `stream`） |
+| `lessons.l14_error_handling_robustness_graph` | `14_error_handling_robustness_graph.py`（`risk_status` 路由、退避重试环、降级支路） |
+| `lessons.l14b_payment_capture_resilience` | `14b_payment_capture_resilience_graph.py`（支付请款 Capture + PSP 语义；拓扑与第 14 课同构） |
+| — | `09b_order_subgraph_input_schema_graph.py`（**仅 Python**：生产向 `WmsSubState` 子图 + `input_schema` 对账节点） |
 
 ## 依赖版本（本 `pom.xml`）
 
