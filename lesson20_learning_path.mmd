@@ -1,0 +1,40 @@
+%% 第二十课自动生成：课程主路径 1～19（与 lesson20_course_review.catalog 同源）
+flowchart LR
+  L1["1. Hello LangGraph<br/><small>StateGraph / invoke</small>"]
+  L2["2. 条件分支<br/><small>add_conditional_edges / 路由函数</small>"]
+  L1 --> L2
+  L3["3. 循环与重试<br/><small>回边 / max_iterations</small>"]
+  L2 --> L3
+  L4["4. Mini-Agent<br/><small>生成-评估-重试 / attempt</small>"]
+  L3 --> L4
+  L5["5. 工具节点<br/><small>Tool / finalize_result</small>"]
+  L4 --> L5
+  L6["6. LLM 接入<br/><small>ChatOpenAI / Ark</small>"]
+  L5 --> L6
+  L7["7. 消息与上下文<br/><small>add_messages / history</small>"]
+  L6 --> L7
+  L8["8. 多工具路由<br/><small>优先级 / fan-in</small>"]
+  L7 --> L8
+  L9["9. 子图模块化<br/><small>子图 compile / 嵌套</small>"]
+  L8 --> L9
+  L10["10. 并行与聚合<br/><small>fan-out / reducer</small>"]
+  L9 --> L10
+  L11["11. 人机协同 HITL<br/><small>interrupt / Command.resume</small>"]
+  L10 --> L11
+  L12["12. Checkpoint<br/><small>InMemorySaver / thread_id</small>"]
+  L11 --> L12
+  L13["13. 可观测性<br/><small>stream_mode / logging</small>"]
+  L12 --> L13
+  L14["14. 容错<br/><small>risk_status / 退避重试</small>"]
+  L13 --> L14
+  L15["15. 评测与门禁<br/><small>GoldenCase / MIN_PASS_RATIO</small>"]
+  L14 --> L15
+  L16["16. RAG 整合<br/><small>retrieve / citations</small>"]
+  L15 --> L16
+  L17["17. 多 Agent 协作<br/><small>Planner / Critic</small>"]
+  L16 --> L17
+  L18["18. 发布治理<br/><small>契约 / REPO_DEPS_PIN</small>"]
+  L17 --> L18
+  L19["19. Capstone 应用<br/><small>多包分层 / InMemorySaver</small>"]
+  L18 --> L19
+  L19 --> L20[20. 复盘与进阶路线<br/><small>本课工具包</small>]
